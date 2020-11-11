@@ -1,0 +1,12 @@
+<div style="background-color:#3e3e3e70;padding:10px;">
+&copy; {{now.Year}} Powerd By <a href="https://gohugo.io">Hugo {{ hugo.Version }}</a>
+Last Build Time : {{ dateFormat "2006-01-02 Mon 15:04:05 " hugo.BuildDate }}
+<!-- Format "2006-01-02 15:04" -->
+<span style="margin-left:1rem;margin-right:1rem;float:right;color:green;">📜{{ len .Site.RegularPages }}</span>
+{{ if .IsHome }}
+{{ with .OutputFormats.Get "RSS" }}
+<a style="float:right;border:0px solid;top:0;text-decoration:none;" 
+  href="{{ .RelPermalink }}">📰RSS</a>
+{{ end }}
+{{ end }}
+</div>

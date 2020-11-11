@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div style="margin:1rem;">
+<div style="font-weight:800;font-size:1.1rem;text-align:center;width:100;">
+{{ .Type }}
+</div>
+<!-- https://www.jakewiesler.com/blog/hugo-taxonomies -->
+{{ .Title }}
+<ul>
+  {{ range .Data.Pages }}
+  <li>
+    <a href="{{.RelPermalink}}">{{ .Title }}</a>
+  </li>
+  {{ end }}
+</ul>
+</div>
+{{ end }}

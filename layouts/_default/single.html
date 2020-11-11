@@ -1,0 +1,70 @@
+{{ define "title" }}
+  {{ .Title }} | {{ .Site.Title }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="article-cover">
+<div class="article-title">{{ .Title }}</div>
+{{/* .Date.Format "Mon 15:04 January 01, 2006" */}}
+{{ .Date.Format "2006-01-02 Mon 15:04" }}
+- about {{ .WordCount }} words
+( read in {{ .ReadingTime }} min )
+{{ if .Params.lastmod }}
+<br/>Last Modified At {{ .Lastmod.Format "2006-01-02 Mon 15:04" }}
+{{ end }}
+{{ if .Params.expiryDate }}
+<br/>Expiry Time: {{ .ExpiryDate.Format "2006-01-02 Mon 15:04" }}
+{{ end }}
+<br/>
+{{ partial "list_cat.html" . }}
+{{ partial "list_tag.html" . }}
+</div>
+
+{{ if .Params.toc }}
+<div id="article_toc" class="article-toc">
+  {{ .TableOfContents }}
+</div>
+<script>
+ //article_toc.hidden = true;
+</script>
+{{ end }}
+
+<div id="page_content">
+{{ .Content }}
+</div>
+
+<br/>
+<div style="display:flex;">
+  {{with .Site.RegularPages.Next . }}
+  <div class="page-np">
+  NEXT: <a href="{{.RelPermalink}}">{{ .Title }}</a>
+  </div>
+  {{end}}
+  {{with .Site.RegularPages.Prev . }}
+  <div class="page-np">
+  PREV: <a href="{{.RelPermalink}}">{{ .Title }}</a>
+  </div>
+  {{end}}
+</div>
+
+<script>
+function showCodeType() {
+  let pare = page_content.querySelectorAll('div.highlight')
+  //if (!pare.length) return;
+  for (let p=0;p<pare.length;p++) {
+    let code_elem = pare[p].querySelectorAll('pre>code')
+    for (let i=0;i<code_elem.length;i++) {
+      let lang = code_elem[i].getAttribute('data-lang');
+      if (lang != null) { //alert(lang);
+        pare[p].insertAdjacentHTML('beforebegin'
+          ,'<span class="code-type-tag">'+lang+'</span>');
+      }
+    }
+  }
+}
+showCodeType();
+</script>
+{{- partial "copyright.html" -}}
+{{ end }}
+

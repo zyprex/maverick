@@ -1,0 +1,8 @@
+<!-- In Hugo 0.55 and later -->
+{{ range (.GetTerms "tags") }}
+<a href="{{ .Permalink }}" >
+  <span class="hexagon-tag">
+    #{{ .LinkTitle }}
+  </span>
+</a>
+{{ end }}

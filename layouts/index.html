@@ -1,0 +1,65 @@
+{{ define "main" }}
+ <!-- http://www.ruanyifeng.com/blog/2015/07/flex-examples.html -->
+<div class="box-flex">
+{{ range .Paginator.Pages }}
+<div class="plain-box">
+  <div style="font-size:0.8rem;">{{ .PublishDate.Format "2006-01-02" }}   {{.Type}}</div>
+  <a class="plain-box-title" href="{{ .RelPermalink }}">
+    {{ .Title }}</a>
+  {{ if .Draft }}
+    <sup style="color:red;">(draft)</sup>
+  {{ end }}
+  <div>
+  {{- partial "list_cat.html" . -}}
+  {{- partial "list_tag.html" . -}}
+  </div>
+  <div style="text-shadow: 0 0 3px #909900;">
+    <!-- hexo compatible -->
+    {{ if .Params.excerpt }}
+      {{- .Params.excerpt -}}
+    {{ else if .Params.description }}
+      {{- .Description -}}
+    {{ else }}
+      &nbsp;
+    {{ end }}
+  </div>
+</div>
+{{ end }} <!--end of list pages-->
+</div>
+
+<div style="text-align:center; margin:10px 0;">
+{{ if gt .Paginator.TotalPages 1 }}
+  <span class="btn btn1">
+  {{ if .Paginator.HasPrev }}
+    <a href="{{ .Paginator.Prev.URL }}" >Prev</a>
+  {{ else }} Prev {{ end }}
+  </span>
+  <span class="" onclick="
+    let elem=document.getElementById('pgi-numbar');
+    elem.hidden = !elem.hidden;">
+    {{ .Paginator.PageNumber }}/{{ .Paginator.TotalPages}}
+  </span>
+  <span class="btn btn1">
+  {{ if .Paginator.HasNext }}
+    <a href="{{ .Paginator.Next.URL }}" >Next</a>
+  {{ else }} Next {{ end }}
+  </span>
+{{ end }}
+</div> <!--end of paginator-->
+
+<div id="pgi-numbar" class="pgi-box">
+{{ $curpag := .Paginator.PageNumber }}
+{{ range .Paginator.Pagers }}
+  {{ if eq .PageNumber $curpag }}
+    <span class="pgi pgi-active">{{ .PageNumber }}</span>
+  {{ else }}
+    <span class="pgi"><a href="{{ .URL }}">{{ .PageNumber }}</a></span>
+  {{ end }}
+{{ end }}
+</div>
+
+<script>
+document.getElementById('pgi-numbar').hidden = true;
+</script>
+<!--end of main, don't put this line outer the "end"-->
+{{ end }}

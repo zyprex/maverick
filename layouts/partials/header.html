@@ -1,0 +1,19 @@
+<nav class="navbar-top">
+  <span style="flex:50%;">
+    <!-- <a style="color:#bc8f8f;text-shadow: #fff 0.1px 0 0, #fff 0 0.1px 0, #fff -0.1px 0 0, #fff 0 -0.1px 0;text-decoration:none;" href="{{ .Site.BaseURL }}"></a> -->
+    <a style="font-weight:800;color:#20b2aa;text-decoration:none;" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+    <a><span onclick="sidebar_open('sidebar-l');">&nbsp;♦♦♦&nbsp;</span></a>
+    {{ with $.Site.Params.subtitle}}{{$.Site.Params.subtitle}}
+    {{ end }}
+  </span>
+  <!-- <span class="nav-placeholder">&nbsp;</span> -->
+  <span style="flex:1;text-align:right;">
+    <a id="dark-mode-toggle" class="light-theme">&nbsp;🌙&nbsp;</a>
+    {{ if .Params.toc }}
+    <a onclick="article_toc.hidden=!article_toc.hidden">&nbsp;⚓&nbsp;</a>
+    {{ end }} <!-- &bull;&nbsp; -->
+    <a style="color:white" onclick="sidebar_open('sidebar-r')">&nbsp;〓&nbsp;</a>
+    <!-- <a href="#sidebar-r">→</a> -->
+  </span>
+</nav>
+<!-- https://gohugo.io/templates/taxonomy-templates/#example-list-all-taxonomies-terms-and-assigned-content -->

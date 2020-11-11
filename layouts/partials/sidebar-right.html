@@ -1,0 +1,53 @@
+<!-- sidebar start -->
+<!-- <aside> </aside> -->
+<!-- https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Consistent_list_indentation -->
+
+<div id="sidebar-r" class="sidebar-r">
+<div onclick="hiddenAll();" class="sb-tree-title">taxonomies</div>
+<div id="sb_tree" class="sb-tree">
+  {{ range $taxonomy_term, $taxonomy := .Site.Taxonomies }}
+  <div id="sb_tree_lv1" class="sb-tree-lv1">
+  <span onclick="">{{ $taxonomy_term}}<sup>{{ len $taxonomy }}</sup></span>
+    {{ range $key, $value := $taxonomy }}
+    <div id="sb_tree_lv2" class="sb-tree-lv2">
+    <span onclick="">{{ $key }}<sup>{{ len $value }}</sup></span>
+      <div id="sb_tree_lv3" class="sb-tree-lv3">
+      {{ range $value.Pages }}
+       <!-- <a onclick="window.location.href='{{.Permalink}}';"> -->
+       <a href="{{.Permalink}}">{{- .Title -}}</a><br/>
+      {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+</div>
+
+<script>
+  for (let atree of sb_tree.querySelectorAll('div')) {
+    if ( atree.id == 'sb_tree_lv3' ) atree.hidden = 1;
+  }
+  function hiddenAll() {
+    for (let atree of sb_tree.querySelectorAll('div')) {
+      if ( atree.id == 'sb_tree_lv2' ) atree.hidden = 0;
+      if ( atree.id == 'sb_tree_lv3' ) atree.hidden = 1;
+    }
+  }
+  sb_tree.onclick = function toggleSubtree(){
+    let tag_name = event.target.tagName;
+    if ( tag_name == 'SPAN' ) {
+      let childrenContainer =
+        event.target.parentNode.querySelectorAll("div");
+      for (let i of childrenContainer) {
+        i.hidden = !i.hidden;
+      }
+    } else if ( tag_name == 'SUP' ) {
+      let childrenContainer =
+        event.target.parentNode.parentNode.querySelectorAll("div");
+      for (let i of childrenContainer) {
+        i.hidden = !i.hidden;
+      }
+    }
+  }
+</script>

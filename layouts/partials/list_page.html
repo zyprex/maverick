@@ -1,0 +1,21 @@
+<div class="content">
+  {{ range .Site.RegularPages }}
+    <!-- About.md has type 'page' -->
+    {{ if ne .Type "page" }}
+      <div>
+      {{ .PublishDate.Format "January 2, 2006" }}
+      <span style="color:#0001F6;">{{ .Type }}</span>
+      <a href="{{ .Permalink }}" style="color:darkcyan;">{{ .Title }}</a>
+      {{ if .Draft }}
+        <span style="color:#FF4136;">(unpublished)</span>
+      {{ end }}
+      {{ partial "list_cat.html" . }}
+      {{ partial "list_tag.html" . }}
+      <code>{{ .Description }}</code>
+      <br>
+      <!-- use the "more" comment -->
+      <code>{{ .Summary }}...</code>
+      </div>
+    {{ end }}
+  {{ end }}
+</div>

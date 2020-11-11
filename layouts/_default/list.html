@@ -1,0 +1,21 @@
+{{ define "main" }}
+<!-- create a file tree -->
+<div style="margin:1rem;">
+<b><a href="{{ .Site.BaseURL }}">🏠HOME</a></b><br/>
+<b><a href="..">../</a></b><br/>
+{{ .Title }}
+<ul>
+  {{ range .Data.Pages }}
+  <li>
+    {{if .IsPage}}
+      📄<a href="{{.RelPermalink}}">{{ .Title }}</a>
+    {{else}}
+      📁<a href="{{.RelPermalink}}">{{ .Title }}</a>&#47;
+    {{end}}
+  </li>
+  {{ end }}
+</ul>
+</div>
+
+{{ end }}
+

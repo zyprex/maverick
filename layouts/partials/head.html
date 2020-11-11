@@ -1,0 +1,20 @@
+<meta charset="UTF-8">
+{{ with $.Site.Params.favicon}}
+<link rel="icon" type="image/png" href="{{$.Site.Params.favicon}}">
+{{ end }}
+<!-- mobile web page adaptation-->
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- http://tachyons.io/docs -->
+<!-- <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="/css/tachyons.min.css"> -->
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+{{ hugo.Generator }}
+<!-- frontmatter conf 'math: true' -->
+{{ if .Params.math }}
+  {{- partial "katex.html" . -}}
+{{ end }}
+<!-- frontmatter conf 'mermaid: true' -->
+{{ if .Params.mermaid }}
+  {{- partial "mermaid-js.html" . -}}
+{{ end }}

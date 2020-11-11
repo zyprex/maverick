@@ -1,0 +1,24 @@
+<!-- https://gohugo.io/templates/base/#define-the-base-template -->
+<!DOCTYPE html>
+<html>
+  <head>
+    {{- partial "head.html" . -}}
+    <!-- can be overridden if need be in  -->
+    <title>{{- block "title" . }}{{ .Site.Title }}{{- end }}</title>
+  </head>
+  <body style="margin:0;">
+    {{- partial "header.html" . -}}
+    {{- partial "sidebar-left.html" . -}}
+    {{- partial "sidebar-right.html" . -}}
+    <div id="content">
+      <!-- can be overridden if need be in  -->
+      {{- block "main" . }}{{- end }}
+    </div>
+    <!-- can be overridden if need be in  -->
+    {{- block "footer" . }}
+      {{- partial "footer.html" . -}}
+    {{- end }}
+  </body>
+</html>
+
+<script src="/js/script.js"></script>

@@ -1,0 +1,17 @@
+<div id="sidebar-l" class="sidebar-l" onclick="this.className='sidebar-l ani-push-l'">
+  <div style="background:#ffffff80;display:flex;">
+    <span style="flex:100%;width:50%;"></span>
+  <div style="width:100%;">
+    <div class="hexagon-img">
+    {{ with $.Site.Params.avatar}}
+      <img class="hexagon-cont" src="{{$.Site.Params.avatar}}" alt="Avatar" />
+    {{ end }}
+    </div>
+  </div>
+    <span style="flex:100%;width:50%;"></span>
+  </div>
+  <br/><br/>
+  <div class="entrance" onclick="location.href='{{ .Site.BaseURL }}/about'">About</div>
+  <div class="entrance" onclick="location.href='{{ .Site.BaseURL }}/gems'">Gems</div>
+  <div class="entrance" onclick="location.href='{{ .Site.BaseURL }}/notions'">Notions</div>
+</div>
