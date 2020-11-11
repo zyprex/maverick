@@ -1,0 +1,2 @@
+# maverick
+decent hugo theme
